@@ -26,7 +26,9 @@
         </section>
         <section>
             <label for="content">Content:</label>
-            <input type="text" name="content" required>  
+            <!-- kernelk14: I added a textarea instead of textinput -->
+            <!-- input type="text" name="content" required -->  
+            <textarea name="content" required></textarea>
         </section> 
         <input type="submit" value="Post Now">   
     </form>
