@@ -1,28 +1,26 @@
+<?php 
+require "database.php";
+
+$result = mysqli_query($conn, "SELECT * FROM posts ORDER BY posted_at DESC");
+?>
 <link rel="stylesheet" href="styles/main.css">
 
-
 <main>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-        <label for="searchbar">Search</label>
-        <input type="text" name="searchbar" placeholder="Search a title">
-        <input type="submit" name="submit" value="Enter">
-    </form>
-    <article class="post">
-        <div>
-            <p>Kin |</p>
-            <p>Posted at: 2025, February 29</p>
-        </div>
-        <h2>Title</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        Similique, perspiciatis quidem. Sed. Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Incidunt, repellat impedit. Facilis ea blanditiis laboriosam, quasi eum, omnis provident officiis quidem saepe eveniet quos amet aliquid repellendus nihil eaque quis magni, reiciendis itaque alias ipsa nisi magnam veniam? Animi, quam?</p>
-    </article>
-    <article class="post">
-        <div>
-            <p>Author |</p>
-            <p>Posted at: 2025, February 29</p>
-        </div>
-        <h2>Title</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit, autem! Soluta nostrum quaerat fugit?</p>
-    </article>
+    <div style="text-align: center; padding: 0 50px ;">
+    <h2><b>Hi! Welcome to Freedom Express Wall!</b></h2>
+    <p>A website where you can post whatever you like through text! No need to login and your personal information is not needed
+        to post anything. Feel free to share your thoughts!</p>
+    </div>
+    <?php if (mysqli_num_rows($result) > 0): ?>
+        <?php while($row = mysqli_fetch_assoc($result)): ?>
+            <article class="post">
+                <div>
+                    <p><?= htmlspecialchars($row["author"]) ?> |</p>
+                    <p>Posted at: <?= date("F j, Y", strtotime($row["posted_at"])) ?></p>
+                </div>
+                <h2><?= htmlspecialchars($row['title']) ?></h2>
+                <p><?= nl2br(htmlspecialchars($row['content'])) ?></p>
+            </article>
+        <?php endwhile; ?>
+    <?php endif; ?>
 </main>

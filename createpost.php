@@ -4,24 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-        <link rel="stylesheet" href="global.css">
-        <link rel="stylesheet" href="styles/post.css">
+    <title>Post Submission</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="styles/post.css">
 </head>
 <body>
     <?php include "components/nav.html"; ?>
+
+    <?php if (isset($_GET["success"])): ?> 
+        <p style="color: green;">✅ Post submitted successfully!</p> 
+    <?php endif; ?>
+
     <form action="php_scripts/post.php" method="POST">
         <section>
             <label for="title">Title:</label>
-            <input type="text" name="title">
+            <input type="text" name="title" maxlength="255" required>
         </section>
         <section>
             <label for="author">Author:</label>
-            <input type="text" name="author">
+            <input type="text" name="author" maxlength="100" required>
         </section>
         <section>
             <label for="content">Content:</label>
-            <input type="text" name="content">  
+            <input type="text" name="content" required>  
         </section> 
         <input type="submit" value="Post Now">   
     </form>
